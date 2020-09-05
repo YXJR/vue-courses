@@ -9,7 +9,10 @@
               {{ c }}
             </div> -->
     <!-- style -->
-    <div class="course-list " v-else>
+    <div
+      class="course-list "
+      v-else
+    >
       <div
         v-for="c in courses"
         :key="c.name"
@@ -18,7 +21,10 @@
         }"
         @click="selectedCourse = c"
       >
-        {{ c.name }} - {{ c.price | currency('￥') }}
+        <router-link :to="`/Course/${c.name}`">
+          {{ c.name }} - {{ c.price | currency('￥') }}
+        </router-link>>
+
       </div>
     </div>
   </div>
@@ -26,7 +32,7 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       selectedCourse: '',
     }
@@ -34,13 +40,13 @@ export default {
   props: {
     courses: {
       type: Array,
-      default: function() {
+      default: function () {
         return []
       },
     },
   },
   filters: {
-    currency(value, symbol = '￥') {
+    currency (value, symbol = '￥') {
       return symbol + value
     },
   },
