@@ -2,12 +2,12 @@
   <div>
     <button
       @click="log"
-      v-if='isLogin'
+      v-if='!isLogin'
     >登录</button>
     <button
       v-else
       @click="logOut"
-    >登录</button>
+    >登出</button>
   </div>
 </template>
 
@@ -24,12 +24,12 @@ export default {
           name: 'Admin',
 
           component: () =>
-            import(/* webpackChunkName: "about" */ '../views/Admin.vue'), //路由懒加载
+            import(/* webpackChunkName: "Admin" */ '../views/Admin.vue'), //路由懒加载
           children: [
             {
               path: ':name',
               name: 'Detail',
-              component: () => import('../views/Detail.vue'),
+              component: () => import(/* webpackChunkName: "Detail" */'../views/Detail.vue'),
             },
           ],
         },
@@ -41,7 +41,7 @@ export default {
       this.$router.push(redirect);
     },
     logOut () {
-      window.isLogin = true
+      window.isLogin = false
     }
   },
   computed: {
