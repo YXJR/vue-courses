@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-
+import store from '../store'
 Vue.use(VueRouter)
 
 const routes = [
@@ -82,7 +82,7 @@ const router = new VueRouter({
 //2.动态路由,根据你是不是登录,动态的添加路由权限.要求用户必须去登录,否则只能去登录页
 
 router.beforeEach((to, from, next) => {
-  if (window.isLogin) {
+  if (store.state.user.isLogin) {
     //已经登录了还要去登录,去/,没有要去登录页则放行
     if (to.path === '/Login') {
       next('/')

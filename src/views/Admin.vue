@@ -9,7 +9,10 @@
     </h2>
     <!-- 弹窗组件 -->
     <!-- <message :show.sync="show" class="success"> -->
-    <message ref="msgSuccess" class="success">
+    <message
+      ref="msgSuccess"
+      class="success"
+    >
       <!-- 命名为title插槽内容 -->
       <template v-slot:title="slotProps">
         <strong>{{ slotProps.title }}</strong>
@@ -21,7 +24,10 @@
     </message>
 
     <!-- <message :show.sync="showWarn" class="warning"> -->
-    <message ref="msgWarning" class="warning">
+    <message
+      ref="msgWarning"
+      class="warning"
+    >
       <!-- 命名为title插槽内容 -->
       <template v-slot:title>
         <strong>警告</strong>
@@ -33,17 +39,25 @@
     </message>
 
     <!-- 新增课程 -->
-    <course-add v-model="course" @add-course="addCourse"></course-add>
+    <course-add
+      v-model="course"
+      @add-course="addCourse"
+    ></course-add>
     <!-- <course-add :value="course" @input="course=$event" @add-course="addCourse"></course-add> -->
 
     <!-- 批量更新价格 -->
     <p>
-      <input type="text" v-model.number="price" />
+      <input
+        type="text"
+        v-model.number="price"
+      />
       <button @click="batchUpdate">批量更新价格</button>
     </p>
 
     <!-- 列表组件 -->
     <course-list :courses="courses"></course-list>
+    <router-view>
+    </router-view>
   </div>
 </template>
 
@@ -59,7 +73,7 @@ export default {
     courseList,
   },
 
-  data() {
+  data () {
     return {
       title: '开课吧购物车',
       course: '',
@@ -70,7 +84,7 @@ export default {
       price: 0,
     }
   },
-  async created() {
+  async created () {
     // 组件实例已创建，由于未挂载，dom不存在
     const courses = await getCourses()
     this.courses = courses
@@ -80,7 +94,7 @@ export default {
   },
   // mounted(){},
   methods: {
-    addCourse() {
+    addCourse () {
       if (this.course) {
         // 添加course到数组
         this.courses.push({ name: this.course })
@@ -95,7 +109,7 @@ export default {
         this.$refs.msgWarning.toggle()
       }
     },
-    batchUpdate() {
+    batchUpdate () {
       this.courses.forEach((c) => {
         // c.price = this.price
         this.$set(c, 'price', this.price)

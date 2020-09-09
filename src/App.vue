@@ -4,13 +4,25 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/Admin">Admin</router-link>
     </div>
+    <div v-if='isLogin'>
+      {{welcome}}
+    </div>
     <router-view />
   </div>
 </template>
+<script>
+import { mapGetters, mapState } from 'vuex'
+export default {
 
+  computed: {
+    ...mapGetters('user', ['welcome']),
+    ...mapState('user', ['isLogin'])
+  },
+}
+</script>
 <style lang="scss">
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
